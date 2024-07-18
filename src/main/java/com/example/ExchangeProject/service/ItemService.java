@@ -45,6 +45,14 @@ public class ItemService {
         itemRepository.deleteById(id);
     }
 
+    public List<Item> searchItems(String name) {
+        if (name != null) {
+            return itemRepository.findByNameContaining(name);
+        } else {
+            return null;
+        }
+    }
+
     public void loadDataFromApi() {
         // GMS 데이터 호출 및 저장
         ResponseEntity<Item[]> response = restTemplate.getForEntity(GMS_API_URL, Item[].class);
